@@ -1,0 +1,67 @@
+[
+    {
+        "msgSender": "0xe68CAAACdf6439628DFD2fe624847602991A31eB",
+        "eventName": "PositionIncrease",
+        "topic1": "000000000000000000000000811cdfa06018b2160da4965577898884dabb6b78",
+        "eventData": {
+            "addressItems": {
+                "items": {
+                    "account": "0x811cdFA06018b2160DA4965577898884DabB6B78",
+                    "market": "0x2b477989A149B17073D9C9C82eC9cB03591e20c6",
+                    "collateralToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                },
+                "arrayItems": {}
+            },
+            "uintItems": {
+                "items": {
+                    "sizeInUsd": 1991775401176937770800000000000000,
+                    "sizeInTokens": 128996829568758468782178465,
+                    "collateralAmount": 199203203,
+                    "borrowingFactor": 82495898872338798703528249394,
+                    "fundingFeeAmountPerSize": 84509939468843674477,
+                    "longTokenClaimableFundingAmountPerSize": 1226367831638633706150392192190828519,
+                    "shortTokenClaimableFundingAmountPerSize": 399774893704331879058,
+                    "executionPrice": 15440498,
+                    "indexTokenPrice.max": 15441192,
+                    "indexTokenPrice.min": 15433125,
+                    "collateralTokenPrice.max": 999890576696139150000000,
+                    "collateralTokenPrice.min": 999890576696139150000000,
+                    "sizeDeltaUsd": 1991775401176937770800000000000000,
+                    "sizeDeltaInTokens": 128996829568758468782178465,
+                    "orderType": 3,
+                    "increasedAtTime": 1747960879
+                },
+                "arrayItems": {}
+            },
+            "intItems": {
+                "items": {
+                    "collateralDeltaAmount": 199203203,
+                    "priceImpactUsd": 951703040390302746657035960970,
+                    "priceImpactAmount": 61634039677137797823965
+                },
+                "arrayItems": {}
+            },
+            "boolItems": {
+                "items": {
+                    "isLong": false
+                },
+                "arrayItems": {}
+            },
+            "bytes32Items": {
+                "items": {
+                    "orderKey": "0x105ac57b2c1ad970604d36963acbc89cb2f6ab85a91093eeeb2d17cf45a5f1b3",
+                    "positionKey": "0x8477e5588b0f07fba5be943a7aa3760f559a74f6b8d8f7c4e7a1ee0f95e5582c"
+                },
+                "arrayItems": {}
+            },
+            "bytesItems": {
+                "items": {},
+                "arrayItems": {}
+            },
+            "stringItems": {
+                "items": {},
+                "arrayItems": {}
+            }
+        }
+    }
+]

@@ -1,0 +1,822 @@
+[
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x6853ea96ff216fab11d2d930ce3c508556a4bdc4",
+    "decimals": 8,
+    "market": "DOGE/USD",
+    "name": "DOGE",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x70d95587d40a2caf56bd97485ab3eec10bee6336",
+    "decimals": 18,
+    "market": "ETH/USD",
+    "name": "ETH",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x47c031236e19d024b42f8ae6780e44a573170703",
+    "decimals": 8,
+    "market": "BTC/USD",
+    "name": "BTC",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xc7abb2c5f3bf3ceb389df0eecd6120d451170b50",
+    "decimals": 18,
+    "market": "UNI/USD",
+    "name": "UNI",
+    "swap_only": 0,
+    "symbol_a": "UNI",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x09400d9db990d5ed3f35d7be61dfaeb900af03c9",
+    "decimals": 9,
+    "market": "SOL/USD",
+    "name": "SOL",
+    "swap_only": 0,
+    "symbol_a": "SOL",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xc25cef6061cf5de5eb761b50e4743c1f5d7e5407",
+    "decimals": 18,
+    "market": "ARB/USD",
+    "name": "ARB",
+    "swap_only": 0,
+    "symbol_a": "ARB",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd9535bb5f58a1a75032416f2dfe7880c30575a41",
+    "decimals": 8,
+    "market": "LTC/USD",
+    "name": "LTC",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x0ccb4faa6f1f1b30911619f1184082ab4e25813c",
+    "decimals": 6,
+    "market": "XRP/USD",
+    "name": "XRP",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x7f1fa204bb700853d36994da19f830b6ad18455c",
+    "decimals": 18,
+    "market": "LINK/USD",
+    "name": "LINK",
+    "swap_only": 0,
+    "symbol_a": "LINK",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x9c2433dfd71096c435be9465220bb2b189375ea7",
+    "decimals": 18,
+    "market": "USDC/USDC.e",
+    "name": "USDC",
+    "swap_only": 1,
+    "symbol_a": "USDC",
+    "symbol_b": "USDC.e"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xb686bcb112660343e6d15bdb65297e110c8311c4",
+    "decimals": 18,
+    "market": "USDC/USDT",
+    "name": "USDC",
+    "swap_only": 1,
+    "symbol_a": "USDC",
+    "symbol_b": "USDT"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xe2fedb9e6139a182b98e7c2688ccfa3e9a53c665",
+    "decimals": 18,
+    "market": "USDC/DAI",
+    "name": "USDC",
+    "swap_only": 1,
+    "symbol_a": "USDC",
+    "symbol_b": "DAI"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x2d340912aa47e33c90efb078e69e70efe2b34b9b",
+    "decimals": 18,
+    "market": "BNB/USD",
+    "name": "BNB",
+    "swap_only": 0,
+    "symbol_a": "WBNB",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x248c35760068ce009a13076d573ed3497a47bcd4",
+    "decimals": 6,
+    "market": "ATOM/USD",
+    "name": "ATOM",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x63dc80ee90f26363b3fcd609007cc9e14c8991be",
+    "decimals": 24,
+    "market": "NEAR/USD",
+    "name": "NEAR",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x1cbba6346f110c8a5ea739ef2d1eb182990e4eb2",
+    "decimals": 18,
+    "market": "AAVE/USD",
+    "name": "AAVE",
+    "swap_only": 0,
+    "symbol_a": "AAVE",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x7bbbf946883a5701350007320f525c5379b8178a",
+    "decimals": 18,
+    "market": "AVAX/USD",
+    "name": "AVAX",
+    "swap_only": 0,
+    "symbol_a": "AVAX",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x4fdd333ff9ca409df583f306b6f5a7ffde790739",
+    "decimals": 18,
+    "market": "OP/USD",
+    "name": "OP",
+    "swap_only": 0,
+    "symbol_a": "OP",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x55391d178ce46e7ac8eaaea50a72d1a5a8a622da",
+    "decimals": 18,
+    "market": "GMX/USD",
+    "name": "GMX",
+    "swap_only": 0,
+    "symbol_a": "GMX",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x0418643f94ef14917f1345ce5c460c37de463ef7",
+    "decimals": 6,
+    "market": "WIF/USD",
+    "name": "WIF",
+    "swap_only": 0,
+    "symbol_a": "WIF",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x2b477989a149b17073d9c9c82ec9cb03591e20c6",
+    "decimals": 18,
+    "market": "PEPE/USD",
+    "name": "PEPE",
+    "swap_only": 0,
+    "symbol_a": "PEPE",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x7c11f78ce78768518d743e81fdfa2f860c6b9a77",
+    "decimals": 8,
+    "market": "ARB: BTC",
+    "name": "BTC",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": null
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x450bb6774dd8a756274e0ab4107953259d2ac541",
+    "decimals": 18,
+    "market": "ARB: ETH",
+    "name": "ETH",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": null
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x0cf1fb4d1ff67a3d8ca92c9d6643f8f9be8e03e5",
+    "decimals": 18,
+    "market": "wstETH/USDe",
+    "name": "ETH",
+    "swap_only": 0,
+    "symbol_a": "wstETH",
+    "symbol_b": "USDe"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x45ad16aaa28fb66ef74d5ca0ab9751f2817c81a4",
+    "decimals": 18,
+    "market": "USDe/USDC",
+    "name": "USDC",
+    "swap_only": 1,
+    "symbol_a": "USDe",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xb56e5e2eb50cf5383342914b0c85fe62dbd861c8",
+    "decimals": 18,
+    "market": "wstETH/WETH",
+    "name": "ETH",
+    "swap_only": 1,
+    "symbol_a": "wstETH",
+    "symbol_b": "WETH"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xb62369752d8ad08392572db6d0cc872127888bed",
+    "decimals": 18,
+    "market": "kSHIB/USD",
+    "name": "kSHIB",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x93385f7c646a3048051914bdfac25f4d620aedf1",
+    "decimals": 18,
+    "market": "ORDI/USD",
+    "name": "ORDI",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd9377d9b9a2327c7778867203deea73ab8a68b6b",
+    "decimals": 18,
+    "market": "STX/USD",
+    "name": "STX",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd62068697bcc92af253225676d618b0c9f17c663",
+    "decimals": 18,
+    "market": "tBTC/USD",
+    "name": "tBTC",
+    "swap_only": 0,
+    "symbol_a": "TBTC",
+    "symbol_b": null
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd4b737892bab8446ea1e8bb901db092fb1ec1791",
+    "decimals": 6,
+    "market": "EIGEN/USD",
+    "name": "EIGEN",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x8ea4fb801493dad8724f90fb2e279534fa591366",
+    "decimals": 18,
+    "market": "mSATS/USD",
+    "name": "mSATS",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd0a1afdde31eb51e8b53bdce989eb8c2404828a4",
+    "decimals": 18,
+    "market": "POL/USD",
+    "name": "POL",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x77b2ec357b56c7d05a87971db0188dbb0c7836a5",
+    "decimals": 18,
+    "market": "AAVE/USD",
+    "name": "AAVE",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x0bb2a83f995e1e1eae9d7fdce68ab1ac55b2cc85",
+    "decimals": 18,
+    "market": "PEPE/USD",
+    "name": "PEPE",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd8471b9ea126272e6d32b5e4782ed76db7e554a4",
+    "decimals": 18,
+    "market": "UNI/USD",
+    "name": "UNI",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xdab21c4d1f569486334c93685da2b3f9b0a078e8",
+    "decimals": 18,
+    "market": "APE/USD",
+    "name": "APE",
+    "swap_only": 0,
+    "symbol_a": "APE",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x6ecf2133e2c9751caadcb6958b9654bae198a797",
+    "decimals": 9,
+    "market": "SUI/USD",
+    "name": "SUI",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xb489711b1cb86afda48924730084e23310eb4883",
+    "decimals": 18,
+    "market": "SEI/USD",
+    "name": "SEI",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x66a69c8eb98a7efe22a22611d1967dfec786a708",
+    "decimals": 8,
+    "market": "APT/USD",
+    "name": "APT",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xbeb1f4ebc9af627ca1e5a75981ce1ae97efeda22",
+    "decimals": 6,
+    "market": "TIA/USD",
+    "name": "TIA",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x15c6ebd4175fff9ee3c2615c556fcf62d2d9499c",
+    "decimals": 9,
+    "market": "TON/USD",
+    "name": "TON",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xfac5ff56c269432706d47dc82ab082e9ae7d989e",
+    "decimals": 5,
+    "market": "kBONK/USD",
+    "name": "kBONK",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x71b7ff592a974e2b501d8a7a11f5c42dcd365244",
+    "decimals": 5,
+    "market": "MEW/USD",
+    "name": "MEW",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x6cb901cc64c024c3fe4404c940ff9a3acc229d2c",
+    "decimals": 18,
+    "market": "MEME/USD",
+    "name": "MEME",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xfd46a5702d4d97ce0164375744c65f0c31a3901b",
+    "decimals": 9,
+    "market": "FLOKI/USD",
+    "name": "FLOKI",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x71237f8c3d1484495a136022e16840b70ff84a69",
+    "decimals": 6,
+    "market": "BOME/USD",
+    "name": "BOME",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x784292e87715d93afd7cb8c941bacafaaa9a5102",
+    "decimals": 18,
+    "market": "PENDLE/USD",
+    "name": "PENDLE",
+    "swap_only": 0,
+    "symbol_a": "PENDLE",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xe55e1a29985488a2c8846a91e925c2b7c6564db1",
+    "decimals": 18,
+    "market": "TAO/USD",
+    "name": "TAO",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x3680d7bfe9260d3c5de81aeb2194c119a59a99d1",
+    "decimals": 18,
+    "market": "TRX/USD",
+    "name": "TRX",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x872b5d567a2469ed92d252eacb0eb3bb0769e05b",
+    "decimals": 18,
+    "market": "WLD/USD",
+    "name": "WLD",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xbd48149673724f9caee647bb4e9d9ddaf896efeb",
+    "decimals": 18,
+    "market": "GMX/USD",
+    "name": "GMX",
+    "swap_only": 0,
+    "symbol_a": "GMX",
+    "symbol_b": null
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xcacb964144f9056a8f99447a303e60b4873ca9b4",
+    "decimals": 18,
+    "market": "ADA/USD",
+    "name": "ADA",
+    "swap_only": 0,
+    "symbol_a": "ADA",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x62feb8ec060a7de5b32bbbf4ac70050f8a043c17",
+    "decimals": 18,
+    "market": "BCH/USD",
+    "name": "BCH",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x7b2d09fca2395713dcc2f67323e4876f27b9ecb2",
+    "decimals": 18,
+    "market": "DOT/USD",
+    "name": "DOT",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xdc4e96a251ff43eeac710462cd8a9d18dc802f18",
+    "decimals": 18,
+    "market": "ICP/USD",
+    "name": "ICP",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xe902d1526c834d5001575b2d0ef901dfd0aa097a",
+    "decimals": 18,
+    "market": "XLM/USD",
+    "name": "XLM",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x4c505e0062459cf8f60fff13279c92ea15ae6e2d",
+    "decimals": 18,
+    "market": "RENDER/USD",
+    "name": "RENDER",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xf22cffa7b4174554ff9dbf7b5a8c01faadcea722",
+    "decimals": 18,
+    "market": "SOL/USD",
+    "name": "SOL",
+    "swap_only": 0,
+    "symbol_a": "SOL",
+    "symbol_b": null
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x262b5203f0fe00d9fe86ffece01d0f54fc116180",
+    "decimals": 18,
+    "market": "FIL/USD",
+    "name": "FIL",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x467c4a46287f6c4918ddf780d4fd7b46419c2291",
+    "decimals": 18,
+    "market": "DYDX/USD",
+    "name": "DYDX",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x16466a03449cb9218eb6a980aa4a44aaced27c25",
+    "decimals": 18,
+    "market": "INJ/USD",
+    "name": "INJ",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xfec8f404fbca3b11afd3b3f0c57507c2a06de636",
+    "decimals": 18,
+    "market": "TRUMP/USD",
+    "name": "TRUMP",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x12fd1a4bdb96219e637180ff5293409502b2951d",
+    "decimals": 18,
+    "market": "MELANIA/USD",
+    "name": "MELANIA",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x9f159014cc218e942e9e9481742fe5bfa9ac5a2c",
+    "decimals": 18,
+    "market": "ENA/USD",
+    "name": "ENA",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xd60f1ba6a76979effe706bf090372ebc0a5bf169",
+    "decimals": 18,
+    "market": "AI16Z/USD",
+    "name": "AI16Z",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x5707673d95a8fd317e2745c4217acd64ca021b68",
+    "decimals": 18,
+    "market": "ANIME/USD",
+    "name": "ANIME",
+    "swap_only": 0,
+    "symbol_a": "ANIME",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xe2730ffe2136aa549327ebce93d58160df7821cb",
+    "decimals": 18,
+    "market": "FARTCOIN/USD",
+    "name": "FARTCOIN",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x75f190e0be6e8b933a01423efe398c6c721a5cff",
+    "decimals": 18,
+    "market": "VIRTUAL/USD",
+    "name": "VIRTUAL",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x0c11ed89889fd03394e8d9d685cc5b85be569c99",
+    "decimals": 18,
+    "market": "PENGU/USD",
+    "name": "PENGU",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xe61e608ba010ff48a7dce8edd8b906744263d33e",
+    "decimals": 18,
+    "market": "LDO/USD",
+    "name": "LDO",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x876ff160d63809674e03f82dc4d3c3ae8b0acf28",
+    "decimals": 18,
+    "market": "BERA/USD",
+    "name": "BERA",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x4d3eb91efd36c2b74181f34b111bc1e91a0d0cb4",
+    "decimals": 18,
+    "market": "DOLO/USD",
+    "name": "DOLO",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xa8a455ed94b315460cff7d96966d91330f6a3ba0",
+    "decimals": 18,
+    "market": "ONDO/USD",
+    "name": "ONDO",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x970e578ff01589bb470ce38a2f1753152a009366",
+    "decimals": 18,
+    "market": "FET/USD",
+    "name": "FET",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x04decfb37e46075189324817df80a32d22b9ed8d",
+    "decimals": 18,
+    "market": "AIXBT/USD",
+    "name": "AIXBT",
+    "swap_only": 0,
+    "symbol_a": "WETH",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xde967676db7b1ccdba2bd94b01b5b19de4b563e4",
+    "decimals": 18,
+    "market": "CAKE/USD",
+    "name": "CAKE",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x2ae5c5cd4843cf588aa8d1289894318130acc823",
+    "decimals": 18,
+    "market": "MKR/USD",
+    "name": "MKR",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x89eb78679921499632ff16b1be3ee48295cfcd91",
+    "decimals": 18,
+    "market": "OM/USD",
+    "name": "OM",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x7de8e1a1fba845a330a6bd91118afda09610fb02",
+    "decimals": 18,
+    "market": "JUP/USD",
+    "name": "JUP",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0xbcb8fe13d02b023e8f94f6881cc0192fd918a5c0",
+    "decimals": 18,
+    "market": "HYPE/USD",
+    "name": "HYPE",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  },
+  {
+    "chain": "arbitrum",
+    "contract_address": "0x4d9ba415649c4b3c703562770c8ff3033478cea1",
+    "decimals": 18,
+    "market": "S/USD",
+    "name": "S",
+    "swap_only": 0,
+    "symbol_a": "WBTC",
+    "symbol_b": "USDC"
+  }
+]

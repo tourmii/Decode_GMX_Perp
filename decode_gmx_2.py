@@ -14,8 +14,188 @@ RPC_URL = "https://arb1.arbitrum.io/rpc"
 
 EVENT_SIGNATURE = "0x137a44067c8961cd7e1d876f4754a5a3a75989b4552f1843fc69c3b372def160"
 
+TOKEN_INFO_ABI = [
+    {
+        "constant": True,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [{"name": "", "type": "uint8"}],
+        "type": "function"
+    },
+    {
+        "constant": True,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [{"name": "", "type": "string"}],
+        "type": "function"
+    }
+]
+
+DEFAULT_USD_SCALE = 30
+
 with open("abi_emitter.json", "r") as f:
     EVENT_ABI = json.load(f)
+
+def get_token_info(web3_instance, token_addr: str, token_info_collection) -> dict:
+    """Get token information (decimals and symbol) from cache or blockchain"""
+    addr = Web3.to_checksum_address(token_addr)
+
+    doc = token_info_collection.find_one({"_id": addr})
+    if doc:
+        return {"decimals": doc["decimals"], "symbol": doc["symbol"]}
+
+    try:
+        contract = web3_instance.eth.contract(address=addr, abi=TOKEN_INFO_ABI)
+        d = contract.functions.decimals().call()
+        s = contract.functions.symbol().call()
+
+        token_info_collection.insert_one({
+            "_id": addr,
+            "decimals": d,
+            "symbol": s
+        })
+
+        return {"decimals": d, "symbol": s}
+    except Exception as e:
+        print(f"Error getting token info for {addr}: {e}")
+        return {"decimals": 18, "symbol": "UNKNOWN"} 
+
+def process_event(event: dict, web3_instance, market_data_collection, token_info_collection) -> dict:
+    """
+    Process and normalize a GMX event, converting raw integers to human-readable values
+    """
+    event = event.copy()
+    
+    field_mappings = {
+        "indexTokenPrice.max": "indexTokenPriceMax",
+        "indexTokenPrice.min": "indexTokenPriceMin", 
+        "collateralTokenPrice.max": "collateralTokenPriceMax",
+        "collateralTokenPrice.min": "collateralTokenPriceMin",
+        "values.priceImpactDiffUsd": "priceImpactDiffUsd"
+    }
+    
+    for old_field, new_field in field_mappings.items():
+        if old_field in event:
+            event[new_field] = event[old_field]
+            del event[old_field]
+
+    timestamp_mappings = {
+        "decreasedAtTime": "timestamp",
+        "increasedAtTime": "timestamp"
+    }
+    
+    for old_field, new_field in timestamp_mappings.items():
+        if old_field in event:
+            event[new_field] = event[old_field]
+            del event[old_field]
+    
+    if "market" not in event:
+        for key, value in event.items():
+            if isinstance(value, int):
+                event[key] = str(value)
+        return event
+    
+    try:
+        mkt_id = event["market"]
+        mkt_doc = market_data_collection.find_one({"_id": mkt_id})
+        
+        if not mkt_doc:
+            print(f"Market data not found for market ID: {mkt_id}")
+            for key, value in event.items():
+                if isinstance(value, int):
+                    event[key] = str(value)
+            return event
+            
+        dec_idx = mkt_doc["decimals"]
+        event["indexTokenName"] = mkt_doc["name"]
+        event["indexTokenDecimals"] = dec_idx
+
+        if "collateralToken" in event:
+            col_addr = event["collateralToken"]
+            info = get_token_info(web3_instance, col_addr, token_info_collection)
+            dec_col = info["decimals"]
+            sym_col = info["symbol"]
+
+            event["collateralTokenSymbol"] = sym_col
+            event["collateralTokenDecimals"] = dec_col
+        else:
+            dec_col = 18  
+
+        usd_fields = [
+            "sizeInUsd", "sizeDeltaUsd", "priceImpactUsd", "basePnlUsd", 
+            "uncappedBasePnlUsd", "borrowingFactor", "priceImpactDiffUsd"
+        ]
+        
+        for usd_field in usd_fields:
+            if usd_field in event and event[usd_field] is not None:
+                try:
+                    val = int(event[usd_field]) if isinstance(event[usd_field], str) else event[usd_field]
+                    event[usd_field] = val / 10**DEFAULT_USD_SCALE
+                except (ValueError, TypeError):
+                    pass
+
+        token_size_fields = ["sizeInTokens", "sizeDeltaInTokens"]
+        for field in token_size_fields:
+            if field in event and event[field] is not None:
+                try:
+                    val = int(event[field]) if isinstance(event[field], str) else event[field]
+                    event[field] = val / 10**dec_idx
+                except (ValueError, TypeError):
+                    pass
+
+        collateral_fields = ["collateralAmount", "collateralDeltaAmount"]
+        for field in collateral_fields:
+            if field in event and event[field] is not None:
+                try:
+                    val = int(event[field]) if isinstance(event[field], str) else event[field]
+                    event[field] = val / 10**dec_col
+                except (ValueError, TypeError):
+                    pass
+
+        price_fields = {
+            "executionPrice": DEFAULT_USD_SCALE - dec_idx,
+            "indexTokenPriceMax": DEFAULT_USD_SCALE - dec_idx,
+            "indexTokenPriceMin": DEFAULT_USD_SCALE - dec_idx,
+            "collateralTokenPriceMax": DEFAULT_USD_SCALE - dec_col,
+            "collateralTokenPriceMin": DEFAULT_USD_SCALE - dec_col,
+        }
+        
+        for field, scale in price_fields.items():
+            if field in event and event[field] is not None:
+                try:
+                    val = int(event[field]) if isinstance(event[field], str) else event[field]
+                    event[field] = val / 10**scale
+                except (ValueError, TypeError):
+                    pass
+
+        funding_fields = {
+            "fundingFeeAmountPerSize": dec_col,
+            "longTokenClaimableFundingAmountPerSize": 30,
+            "shortTokenClaimableFundingAmountPerSize": 30,
+        }
+        
+        for field, scale in funding_fields.items():
+            if field in event and event[field] is not None:
+                try:
+                    val = int(event[field]) if isinstance(event[field], str) else event[field]
+                    event[field] = val / 10**scale
+                except (ValueError, TypeError):
+                    pass
+
+        if "priceImpactAmount" in event and event["priceImpactAmount"] is not None:
+            try:
+                val = int(event["priceImpactAmount"]) if isinstance(event["priceImpactAmount"], str) else event["priceImpactAmount"]
+                event["priceImpactAmount"] = val / 10**dec_idx
+            except (ValueError, TypeError):
+                pass
+
+    except Exception as e:
+        print(f"Error processing event: {e}")
+        for key, value in event.items():
+            if isinstance(value, int):
+                event[key] = str(value)
+        
+    return event
 
 def get_contract_events(w3, from_block, to_block=None):
     if to_block is None:
@@ -61,7 +241,6 @@ def decode_event_data(w3, logs):
                 'rawData': log['data']
             }
             decoded_events.append(event_data)
-
 
     return decoded_events
 
@@ -200,17 +379,13 @@ def flatten_event_data(event_data):
                             flat_data[k] = v
     return flat_data
 
-def convert_large_numbers_to_strings(d):
-    MAX_INT64 = 2**63 - 1
-    for k, v in d.items():
-        if isinstance(v, int) and abs(v) > MAX_INT64:
-            d[k] = str(v)
-    return d
-
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Fetch EventLog1 events from Arbitrum blockchain")
     parser.add_argument("--mongodb_uri", type=str, default="mongodb://localhost:27017/", help="MongoDB URI (default: mongodb://localhost:27017/)")
     parser.add_argument("--mongodb_db", type=str, default="MarketTradingTracker", help="MongoDB database name (default: gmx_events)")
+    parser.add_argument("--realtime_wait", type=float, default=0.5, help="Seconds to wait between checks in real-time mode (default: 0.5)")
+    parser.add_argument("--catchup_wait", type=float, default=0.1, help="Seconds to wait between chunks when catching up (default: 0.1)")
+    parser.add_argument("--realtime_threshold", type=int, default=100, help="Blocks behind threshold for real-time mode (default: 100)")
     return parser.parse_args()
 
 def main():
@@ -219,70 +394,102 @@ def main():
     client = pymongo.MongoClient(args.mongodb_uri)
     db = client[args.mongodb_db]
     gmx_event = db["gmx_events"]
+    market_data = db["gmx_market"]
+    token_info = db["token_info"]
     config = db["configs"]
 
     w3 = Web3(Web3.HTTPProvider(RPC_URL))
     w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 
-    latest_block = w3.eth.block_number
     from_block = config.find_one({"_id":"gmx_last_updated_event"})["last_updated_at_block_number"]
 
     while True:
-        to_block = from_block + 10000
-        print(f"Searching for events from block {from_block} to {to_block}")
+        latest_block = w3.eth.block_number
+        
+        print(f"Current from_block: {from_block}, Latest blockchain block: {latest_block}")
+        
+        blocks_behind = latest_block - from_block
+        
+        if blocks_behind <= 0:
+            print(f"Caught up to latest block {latest_block}. Waiting {args.realtime_wait}s for new blocks...")
+            sleep(args.realtime_wait)
+            continue
+        
+        if blocks_behind > args.realtime_threshold:
+            to_block = from_block + min(10000, blocks_behind)
+            processing_mode = "catch-up"
+            wait_time = args.catchup_wait
+            print(f"Catch-up mode: {blocks_behind} blocks behind, processing {to_block - from_block + 1} blocks")
+        else:
+            chunk_size = min(10, blocks_behind)  
+            to_block = from_block + chunk_size - 1
+            processing_mode = "real-time"
+            wait_time = 0.1  
+            print(f"Real-time mode: {blocks_behind} blocks behind, processing {chunk_size} blocks")
+        
         if to_block > latest_block:
             to_block = latest_block
-            sleep(5)
+            
+        print(f"Searching for events from block {from_block} to {to_block}")
 
         logs = get_contract_events(w3, from_block, to_block)
-        if not logs:
-            print("No matching logs found.")
-            return
-
-        decoded_events = decode_event_data(w3, logs)
-        if not decoded_events:
-            print("No relevant events decoded.")
-            return
-
-        data_types = extract_types_from_abi(EVENT_ABI)
-        if not data_types:
-            print("Not extract data types from ABI for decoding rawData.")
-
-
-        for event in decoded_events:
-            cleaned_event = {
-                "msgSender": event["msgSender"],
-                "eventName": event["eventName"],
-                "topic1": event["topic1"],
-                "transactionHash": event["transactionHash"],
-                "blockNumber": event["blockNumber"]
-            }
-
-            raw_data_bytes = event["rawData"]
-            if raw_data_bytes and data_types:
-                if isinstance(raw_data_bytes, str):
-                    if raw_data_bytes.startswith("0x"):
-                        raw_data_bytes = raw_data_bytes[2:]
-                    raw_data_bytes = bytes.fromhex(raw_data_bytes)
-                elif not isinstance(raw_data_bytes, bytes):
-                    raw_data_bytes = None 
-
-                if raw_data_bytes:
-                    decoded_data_tuple = decode(data_types, raw_data_bytes)
-                    if decoded_data_tuple and isinstance(decoded_data_tuple[-1], tuple):
-                        formatted_data = format_event_rawdata(decoded_data_tuple[-1])
-                        flat_event_data = flatten_event_data(formatted_data)
-                        cleaned_event.update(flat_event_data)
-                        cleaned_event = convert_large_numbers_to_strings(cleaned_event)
-            gmx_event.insert_one(cleaned_event)
-            from_block = to_block
-            config.update_one({"_id": "gmx_last_updated_event"}, {"$set": {"last_updated_at_block_number": from_block}})
-
-
-
-
         
+        if logs:
+            decoded_events = decode_event_data(w3, logs)
+            
+            if decoded_events:
+                data_types = extract_types_from_abi(EVENT_ABI)
+                
+                for event in decoded_events:
+                    try:
+                        cleaned_event = {
+                            "msgSender": event["msgSender"],
+                            "eventName": event["eventName"],
+                            "topic1": event["topic1"],
+                            "transactionHash": event["transactionHash"],
+                            "blockNumber": event["blockNumber"]
+                        }
+
+                        raw_data_bytes = event["rawData"]
+                        if raw_data_bytes and data_types:
+                            if isinstance(raw_data_bytes, str):
+                                if raw_data_bytes.startswith("0x"):
+                                    raw_data_bytes = raw_data_bytes[2:]
+                                raw_data_bytes = bytes.fromhex(raw_data_bytes)
+                            elif not isinstance(raw_data_bytes, bytes):
+                                raw_data_bytes = None 
+
+                            if raw_data_bytes:
+                                decoded_data_tuple = decode(data_types, raw_data_bytes)
+                                if decoded_data_tuple and isinstance(decoded_data_tuple[-1], tuple):
+                                    formatted_data = format_event_rawdata(decoded_data_tuple[-1])
+                                    flat_event_data = flatten_event_data(formatted_data)
+                                    cleaned_event.update(flat_event_data)
+                                    
+                        cleaned_event = process_event(cleaned_event, w3, market_data, token_info)
+                        
+                        cleaned_event["_id"] = cleaned_event["transactionHash"]
+                        
+                        gmx_event.replace_one(
+                            {"_id": cleaned_event["_id"]}, 
+                            cleaned_event, 
+                            upsert=True
+                        )
+                        print(f"Processed event in block {event['blockNumber']}: {event['eventName']}")
+                        
+                    except Exception as e:
+                        print(f"Error processing individual event: {e}")
+                        continue
+        
+        from_block = to_block + 1
+        
+        config.update_one(
+            {"_id": "gmx_last_updated_event"}, 
+            {"$set": {"last_updated_at_block_number": from_block}}
+        )
+        
+        if wait_time > 0:
+            sleep(wait_time)
 
 if __name__ == "__main__":
     main()
-

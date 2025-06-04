@@ -252,7 +252,7 @@ def gmx_events_analytics():
     last_enrich_event = enrich.get('last_updated_at_block_number', -1) if enrich else -1
 
     start_block = last_enrich_event + 1
-    end_block = start_block + 10000 - 1
+    end_block = start_block + 1000 - 1
 
     if end_block > last_crawl_block:
         return False

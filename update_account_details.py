@@ -185,7 +185,7 @@ def parse_args():
     parser.add_argument('--accounts', default='gmx_accounts')
     parser.add_argument('--opening', default='gmx_opening_positions')
     parser.add_argument('--closed', default='gmx_closed_positions')
-    parser.add_argument('--markets', default='gmx_markets')
+    parser.add_argument('--markets', default='gmx_market')
     parser.add_argument('--interval', type=int, default=30)
     return parser.parse_args()
 

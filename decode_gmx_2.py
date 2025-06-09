@@ -96,7 +96,7 @@ def process_event(event: dict, web3_instance, market_data_collection, token_info
         return event
     
     try:
-        mkt_id = event["market"]
+        mkt_id = "gmx_v2_arbitrum"+ event["market"]
         mkt_doc = market_data_collection.find_one({"_id": mkt_id})
         
         if not mkt_doc:

@@ -24,12 +24,12 @@ def get_price():
         name_variants = []
 
         for symbol in symbols:
-            name_variants.extend([symbol, 'k'+symbol, 't'+symbol, 'm'+symbol])
+            name_variants.extend([symbol, 'k'+symbol,'t'+symbol, 'm'+symbol])
         market_infos = collection_market.find({"name": {"$in": name_variants}})
         symbol_decimals = {}
 
         for info in market_infos:
-            for prefix in ['', 'k', 't', 'm']:
+            for prefix in ['', 't', 'k', 'm']:
                 if info['name'].startswith(prefix):
                     symbol_decimals[info['name'].lstrip('ktm')] = info['decimals']
 

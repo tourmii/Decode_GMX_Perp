@@ -381,8 +381,10 @@ def flatten_event_data(event_data):
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Fetch EventLog1 events from Arbitrum blockchain")
-    parser.add_argument("--mongodb_uri", type=str, default="mongodb://localhost:27017/", help="MongoDB URI (default: mongodb://localhost:27017/)")
-    parser.add_argument("--mongodb_db", type=str, default="MarketTradingTracker", help="MongoDB database name (default: gmx_events)")
+    parser.add_argument("--perp_uri", type=str, default="mongodb://localhost:27017/", help="MongoDB URI (default: mongodb://localhost:27017/)")
+    parser.add_argument("--perp_db", type=str, default="perpetuals_knowledge_graph", help="MongoDB database name (default: gmx_events)")
+    parser.add_argument("--etl_uri", type=str, default="mongodb://localhost:27017/", help="MongoDB ETL URI (default: mongodb://localhost:27017/)")
+    parser.add_argument("--etl_db", type=str, default="arbitrum_blockchain_etl", help="MongoDB database name (default: gmx_events)")
     parser.add_argument("--realtime_wait", type=float, default=0.5, help="Seconds to wait between checks in real-time mode (default: 0.5)")
     parser.add_argument("--catchup_wait", type=float, default=0.1, help="Seconds to wait between chunks when catching up (default: 0.1)")
     parser.add_argument("--realtime_threshold", type=int, default=100, help="Blocks behind threshold for real-time mode (default: 100)")
@@ -391,17 +393,21 @@ def parse_arguments():
 def main():
     args = parse_arguments()
 
-    client = pymongo.MongoClient(args.mongodb_uri)
-    db = client[args.mongodb_db]
-    gmx_event = db["gmx_events"]
-    market_data = db["gmx_market"]
-    token_info = db["token_info"]
-    config = db["configs"]
+    perp_client = pymongo.MongoClient(args.perp_uri)
+    perp_db = perp_client[args.perp_db]
+    market_data = perp_db["gmx_market"]
+    token_info = perp_db["token_info"]
+
+    etl_client = pymongo.MongoClient(args.etl_uri)
+    etl_db = etl_client[args.etl_db]
+    collector = etl_db["collectors"]
+    perp_event = etl_db["perp_events"]
+
 
     w3 = Web3(Web3.HTTPProvider(RPC_URL))
     w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 
-    from_block = config.find_one({"_id":"gmx_last_updated_event"})["last_updated_at_block_number"]
+    from_block = collector.find_one({"_id":"gmx_last_updated_event"})["last_updated_at_block_number"]
 
     while True:
         latest_block = w3.eth.block_number
@@ -447,7 +453,8 @@ def main():
                             "eventName": event["eventName"],
                             "topic1": event["topic1"],
                             "transactionHash": event["transactionHash"],
-                            "blockNumber": event["blockNumber"]
+                            "blockNumber": event["blockNumber"],
+                            "platform": "gmx_v2"
                         }
 
                         raw_data_bytes = event["rawData"]
@@ -470,7 +477,7 @@ def main():
                         
                         cleaned_event["_id"] = cleaned_event["transactionHash"]
                         
-                        gmx_event.replace_one(
+                        perp_event.replace_one(
                             {"_id": cleaned_event["_id"]}, 
                             cleaned_event, 
                             upsert=True
@@ -483,7 +490,7 @@ def main():
         
         from_block = to_block + 1
         
-        config.update_one(
+        collector.update_one(
             {"_id": "gmx_last_updated_event"}, 
             {"$set": {"last_updated_at_block_number": from_block}}
         )
